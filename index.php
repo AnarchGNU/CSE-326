@@ -31,25 +31,24 @@
 
     <main>
       <div class="movie-grid">
-        
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
 
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
+        <?php
 
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
+          require_once 'includes/database.php';
 
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
-        <a class="movie-item"></a>
+          foreach(listMovies(12) as $movie) {
+            echo '<img src="images/' . $movie->poster . '">';
+            echo '<a class="movie-item">' . $movie->title . '</a>';
+          }
+
+        ?>
 
       </div>
     </main>
+
+    <footer>
+      <?php require_once 'includes/footer.php'; ?>
+    </footer>
 
   </body>
 </html>
