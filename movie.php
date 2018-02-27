@@ -20,15 +20,14 @@
         <?php
 
           require_once 'includes/database.php';
+          $movie_id = $_GET['id'];
+          $movie = getMovieData($movie_id);
 
-          foreach(listMovies(12) as $movie) {
-            echo '<a href="movie.php?id=' . $movie->id . '">';
-            echo '<div class="movie-item">';
-            echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
-            echo '<span class="movie-title">' . $movie->title . '</span>';
-            echo '</div>';
-            echo '</a>';
-          }
+          echo $movie->title;
+          echo $movie->id;
+          echo $movie->poster;
+          echo $movie->date;
+          echo $movie->budget;
 
         ?>
 
