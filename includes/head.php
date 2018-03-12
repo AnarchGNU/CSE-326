@@ -5,7 +5,6 @@
 <meta name="keywords" content="movie, movies, watch, stream, recommend, movie recommend, movie recommendations">
 
 <!-- Styles -->
-<link rel="stylesheet" href="css/bulma.css">
 <link rel="stylesheet" href="css/style.css">
 
 <!-- Favicon -->

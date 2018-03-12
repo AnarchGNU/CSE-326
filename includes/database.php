@@ -41,9 +41,8 @@ function listMovies($num) {
   $conn = databaseConnect();
   $movies = array();
 
-  // SELECT title FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -10 YEAR) LIMIT 10
+  $query = 'SELECT title, poster_path, movie_id FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -2 YEAR) ORDER BY avg_rating_imdb LIMIT ' . $num;
 
-  $query = 'SELECT title, poster_path, movie_id FROM movie ORDER BY avg_rating_imdb DESC LIMIT ' . $num;
   $result = $conn->query($query);
 
   if($result->num_rows > 0) {
