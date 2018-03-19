@@ -20,8 +20,13 @@ function databaseConnect() {
 
   static $conn;
 
-  if($conn === NULL)
-    $conn = mysqli_connect('localhost', 'root', 'newpassword', 'PyFlicks');
+  if($conn === NULL) {
+    if($_SERVER['HTTP_HOST'] == "localhost") {
+      $conn = mysqli_connect('localhost', 'root', 'newpassword', 'PyFlicks');
+    } else {
+      $conn = mysqli_connect('localhost', 'soco5_MovieUser', 'Y)_t8SeRT~If', 'soco5_PyFlicks');
+    }
+  }
 
   if(mysqli_connect_errno()) {
     echo 'Database Connection Failed.';
