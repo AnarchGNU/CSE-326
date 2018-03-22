@@ -12,6 +12,15 @@ class Movie {
   public $date;
 }
 
+class Cast {
+  public $actor;
+  public $character;
+}
+
+class Production {
+  public $producer;
+  public $movie_id;
+}
 /**
  * Establish a database connection.
  */
@@ -22,6 +31,7 @@ function databaseConnect() {
 
   if($conn === NULL) {
     if($_SERVER['HTTP_HOST'] == "localhost") {
+      
       $conn = mysqli_connect('localhost', 'root', 'newpassword', 'PyFlicks');
     } else {
       $conn = mysqli_connect('localhost', 'soco5_MovieUser', 'Y)_t8SeRT~If', 'soco5_PyFlicks');
@@ -44,8 +54,9 @@ function databaseConnect() {
 function listMovies($num) {
 
   $conn = databaseConnect();
-  $movies = array();
 
+  $movies = array();
+  
   $query = 'SELECT title, poster_path, movie_id FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -2 YEAR) ORDER BY avg_rating_imdb LIMIT ' . $num;
 
   $result = $conn->query($query);
@@ -58,10 +69,14 @@ function listMovies($num) {
       $movie->id = $row["movie_id"];
       array_push($movies, $movie);
     }
+  } else {
+    echo "no results";
   }
 
   return $movies;
 }
+
+
 
 function getMovieData($id) {
 
@@ -74,7 +89,7 @@ function getMovieData($id) {
   $query = 'SELECT * FROM movie_genre WHERE movie_id = ' . $id . ' LIMIT 1';
   $result = $conn->query($query);
   $genre = $result->fetch_assoc();
-  $genre = $genre["genre"];
+  $genre = $genre["genre_name"];
 
   $movie = new Movie();
   $movie->title = $row["title"];
@@ -89,5 +104,61 @@ function getMovieData($id) {
 
   return $movie;
 }
+
+/**
+retrieves production information about a movie
+*/
+function getProducerData($movie_id) {
+  $conn = databaseConnect();
+
+  $query = 'SELECT * FROM production WHERE movie_id = ' . $movie_id;
+
+  $result = $conn->query($query);
+  $row = $result->fetch_assoc();
+
+  $produce = new Production();
+
+  $produce->producer = $row["production"];
+  $produce->movie_id = $movie_id;
+
+  return $produce;
+}
+
+/**
+Retrieves cast information from a movie
+*/
+function getActors($id) {
+  $conn = databaseConnect();
+  $actors = array();
+
+
+
+  $query = 'SELECT * FROM casts WHERE movie_id = ' . $id;
+  $result = $conn->query($query);
+
+  if($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      $cast = new Cast();
+      $cast->actor = $row["actor_name"];
+      $cast->character = $row["character"];
+
+      array_push($actors, $cast);
+
+    }
+  }
+
+  return $actors;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

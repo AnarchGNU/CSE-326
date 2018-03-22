@@ -20,7 +20,6 @@
         <?php
 
           require_once 'includes/database.php';
-
           foreach(listMovies(12) as $movie) {
             echo '<a href="movie.php?id=' . $movie->id . '">';
             echo '<div class="movie-item">';

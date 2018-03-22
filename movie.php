@@ -23,11 +23,18 @@
           $movie_id = $_GET['id'];
           $movie = getMovieData($movie_id);
 
-          echo $movie->title;
-          echo $movie->id;
-          echo $movie->poster;
-          echo $movie->date;
-          echo $movie->budget;
+          echo '<div class=movie-inf>';
+
+          echo '<h3>Movie Information </h3> <br>';
+          echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
+          echo 'Title: ' . $movie->title . '<br>';
+          echo 'Genre: ' . $movie->genre . '<br>';
+          echo 'Country: ' . $movie->country . '<br>';
+          echo 'Released: ' . $movie->date . '<br>';
+          echo 'Rating: ' . $movie->rating . '<br>';
+          echo "ID: ". $movie_id . '<br>';
+          
+          echo "</div>";
 
         ?>
 
