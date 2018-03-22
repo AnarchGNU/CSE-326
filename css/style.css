@@ -80,6 +80,7 @@ main {
   justify-content: space-around;
 }
 
+
 .movie-item {
   margin: 10px;
   max-width: 166px;
@@ -115,7 +116,19 @@ main {
 
 .movie-inf {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 300px);
+
+}
+
+.cast {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  font-weight: bold;
+}
+
+.actor{
+  margin-top: 10px;
+
 }
 
 footer {
