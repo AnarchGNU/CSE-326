@@ -150,8 +150,49 @@ function getActors($id) {
   return $actors;
 }
 
+function searchFor($search, $by, $type) {
+  $conn = databaseConnect();
+  $results = array();
 
 
+
+  if (strcmp($by, 'Title') == 0) { //search by title
+    if (strcmp($type, 'Exact') ==0) {
+      $query = 'SELECT * FROM movie WHERE title = "'. $search . '"';
+
+    } else {
+    //$query = 'SELECT *, LEVENSHTEIN(title, "' .$search .'") AS distance FROM movie WHERE LEVENSHTEIN(title, "com") < 5 ORDER BY distance DESC';
+      $query = 'SELECT * FROM movie WHERE title like "%'. $search . '%"';
+    }
+  } else   if (strcmp($by, 'Actor') == 0) { //search by actor
+    if (strcmp($type, 'Exact') == 0) {
+      $query = 'SELECT * FROM casts WHERE actor_name="'. $search . '"';
+  
+    } else {
+      $query = 'SELECT * FROM casts WHERE actor_name like "%'. $search . '%"';
+    }
+  } else {//search by production
+    if (strcmp($type, 'Exact') == 0) { 
+      $query = 'SELECT * FROM production WHERE production="'. $search . '"';
+
+    } else {
+      $query = 'SELECT * FROM production WHERE production like "%'. $search . '%"';
+    }
+  }
+
+  $result = $conn->query($query);
+
+  if($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      array_push($results, $row['movie_id']);
+    }
+  } else {
+    echo "no results";
+  }
+
+
+  return $results;
+}
 
 
 
