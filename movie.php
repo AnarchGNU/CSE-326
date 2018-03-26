@@ -21,6 +21,12 @@
 
           require_once 'includes/database.php';
           $movie_id = $_GET['id'];
+
+          if(!$movie_id || $movie_id == "") {
+            echo "Please enter a movie ID to lookup the data.";
+            exit();
+          }
+
           $movie = getMovieData($movie_id);
           $produce = getProducerData($movie_id);
 

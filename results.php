@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <?php require_once 'includes/head.php'; ?>
+
+    <!-- Title -->
+    <title>PyFlicks - Find New Movies</title>
+  </head>
+
+  <body>
+
+    <header>
+      <?php require_once 'includes/header.php'; ?>
+    </header>
+
+    <main>
+
+        <?php
+
+          require_once 'includes/database.php';
+
+          if(!isset($_GET["search"])) {
+            echo '<h3>No search query entered.</h3>';
+            exit();
+          }
+
+          $search = $_GET["search"];
+          $results = searchFor($search);
+
+          if(!$results) {
+            echo '<h3>No results found.</h3>';
+            exit();
+          }
+
+
+          // Print the movies in list
+          echo '<h3>Movie results for "' . $search . '"</h3>';
+          echo '<div class="movie-grid">';
+
+          foreach($results as $movie) {
+            echo '<a href="movie.php?id=' . $movie->id . '">';
+            echo '<div class="movie-item">';
+            echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
+            echo '<span class="movie-title">' . $movie->title . '</span>';
+            echo '</div>';
+            echo '</a>';
+          }
+
+          echo '</div>';
+
+
+
+
+
+
+
+        ?>
+
+    </main>
+
+    <footer>
+      <?php require_once 'includes/footer.php'; ?>
+    </footer>
+
+  </body>
+</html>

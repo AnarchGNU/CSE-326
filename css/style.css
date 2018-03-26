@@ -62,14 +62,22 @@ header .left {
 header .right {
   grid-area: right;
   justify-self: end;
+}
 
+.search {
+  display: inline;
+}
+
+.search input {
+  padding: 5px;
+  border: 0;
+  border-radius: 5px;
 }
 
 main {
   grid-area: main;
-
+  
   padding: 30px;
-
   background-color: #ffffff;
 }
 
@@ -122,7 +130,7 @@ main {
 
 .cast {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
+  grid-template-columns: repeat(4, 1fr);
   font-weight: bold;
 }
 

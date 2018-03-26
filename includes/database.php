@@ -31,7 +31,7 @@ function databaseConnect() {
 
   if($conn === NULL) {
     if($_SERVER['HTTP_HOST'] == "localhost") {
-      
+
       $conn = mysqli_connect('localhost', 'root', 'newpassword', 'PyFlicks');
     } else {
       $conn = mysqli_connect('localhost', 'soco5_MovieUser', 'Y)_t8SeRT~If', 'soco5_PyFlicks');
@@ -56,7 +56,7 @@ function listMovies($num) {
   $conn = databaseConnect();
 
   $movies = array();
-  
+
   $query = 'SELECT title, poster_path, movie_id FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -2 YEAR) ORDER BY avg_rating_imdb LIMIT ' . $num;
 
   $result = $conn->query($query);
@@ -106,8 +106,9 @@ function getMovieData($id) {
 }
 
 /**
-retrieves production information about a movie
-*/
+ * Retrieves production information about a movie
+ */
+
 function getProducerData($movie_id) {
   $conn = databaseConnect();
 
@@ -125,13 +126,12 @@ function getProducerData($movie_id) {
 }
 
 /**
-Retrieves cast information from a movie
-*/
+ * Retrieves cast information from a movie
+ */
+
 function getActors($id) {
   $conn = databaseConnect();
   $actors = array();
-
-
 
   $query = 'SELECT * FROM casts WHERE movie_id = ' . $id;
   $result = $conn->query($query);
@@ -150,48 +150,70 @@ function getActors($id) {
   return $actors;
 }
 
-function searchFor($search, $by, $type) {
+/**
+ * Search database by keyword.
+ */
+
+function searchFor($search) {
+
   $conn = databaseConnect();
   $results = array();
 
-
-
-  if (strcmp($by, 'Title') == 0) { //search by title
-    if (strcmp($type, 'Exact') ==0) {
-      $query = 'SELECT * FROM movie WHERE title = "'. $search . '"';
-
-    } else {
-    //$query = 'SELECT *, LEVENSHTEIN(title, "' .$search .'") AS distance FROM movie WHERE LEVENSHTEIN(title, "com") < 5 ORDER BY distance DESC';
-      $query = 'SELECT * FROM movie WHERE title like "%'. $search . '%"';
-    }
-  } else   if (strcmp($by, 'Actor') == 0) { //search by actor
-    if (strcmp($type, 'Exact') == 0) {
-      $query = 'SELECT * FROM casts WHERE actor_name="'. $search . '"';
-  
-    } else {
-      $query = 'SELECT * FROM casts WHERE actor_name like "%'. $search . '%"';
-    }
-  } else {//search by production
-    if (strcmp($type, 'Exact') == 0) { 
-      $query = 'SELECT * FROM production WHERE production="'. $search . '"';
-
-    } else {
-      $query = 'SELECT * FROM production WHERE production like "%'. $search . '%"';
-    }
-  }
-
+  // Title results
+  $query = 'SELECT movie_id FROM movie WHERE title like "%'. $search . '%" ORDER BY votes_count DESC';
   $result = $conn->query($query);
 
   if($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      array_push($results, $row['movie_id']);
+      array_push($results, getMovieData($row['movie_id']));
     }
   } else {
     echo "no results";
   }
 
-
   return $results;
+
+  // Actor results
+
+
+  // Production results
+
+  // if (strcmp($by, 'Title') == 0) { //search by title
+  //   if (strcmp($type, 'Exact') ==0) {
+  //     $query = 'SELECT * FROM movie WHERE title = "'. $search . '"';
+  //
+  //   } else {
+  //   //$query = 'SELECT *, LEVENSHTEIN(title, "' .$search .'") AS distance FROM movie WHERE LEVENSHTEIN(title, "com") < 5 ORDER BY distance DESC';
+  //     $query = 'SELECT * FROM movie WHERE title like "%'. $search . '%"';
+  //   }
+  // } else   if (strcmp($by, 'Actor') == 0) { //search by actor
+  //   if (strcmp($type, 'Exact') == 0) {
+  //     $query = 'SELECT * FROM casts WHERE actor_name="'. $search . '"';
+  //
+  //   } else {
+  //     $query = 'SELECT * FROM casts WHERE actor_name like "%'. $search . '%"';
+  //   }
+  // } else {//search by production
+  //   if (strcmp($type, 'Exact') == 0) {
+  //     $query = 'SELECT * FROM production WHERE production="'. $search . '"';
+  //
+  //   } else {
+  //     $query = 'SELECT * FROM production WHERE production like "%'. $search . '%"';
+  //   }
+  // }
+  //
+  // $result = $conn->query($query);
+  //
+  // if($result->num_rows > 0) {
+  //   while($row = $result->fetch_assoc()) {
+  //     array_push($results, $row['movie_id']);
+  //   }
+  // } else {
+  //   echo "no results";
+  // }
+  //
+  //
+  // return $results;
 }
 
 
