@@ -5,7 +5,7 @@
     <?php require_once 'includes/head.php'; ?>
 
     <!-- Title -->
-    <title>PyFlicks - Find New Movies</title>
+    <title>PyFlicks - Search</title>
   </head>
 
   <body>
@@ -21,7 +21,7 @@
           <input type="text" placeholder="Search" name="search" required> <br>
 
           <h4>Search by</h4>
-          <input type="radio" name="searchBy" value="Title" group='by' checked>Title 
+          <input type="radio" name="searchBy" value="Title" group='by' checked>Title
           <input type="radio" name="searchBy" value="Actor" group='by'>Actor
           <input type="radio" name="searchBy" value="Producer" group='by'>Producer <br>
 
@@ -36,6 +36,6 @@
     <footer>
       <?php require_once 'includes/footer.php'; ?>
     </footer>
-  
+
   </body>
 </html>

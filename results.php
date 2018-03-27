@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <?php require_once 'includes/head.php'; ?>
 
     <!-- Title -->
-    <title>PyFlicks - Find New Movies</title>
+    <title>PyFlicks - Search Results</title>
   </head>
 
   <body>
@@ -28,26 +29,28 @@
           $search = $_GET["search"];
           $results = searchFor($search);
 
-          if(!$results) {
+          if(!$results || empty($results)) {
             echo '<h3>No results found.</h3>';
-            exit();
-          }
+          } else {
+
+            $length = count($results);
 
 
-          // Print the movies in list
-          echo '<h3>Movie results for "' . $search . '"</h3>';
-          echo '<div class="movie-grid">';
+            // Print the movies in list
+            echo '<h3>' . $length . ' movie results for "' . $search . '"</h3>';
+            echo '<div class="movie-grid">';
 
-          foreach($results as $movie) {
-            echo '<a href="movie.php?id=' . $movie->id . '">';
-            echo '<div class="movie-item">';
-            echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
-            echo '<span class="movie-title">' . $movie->title . '</span>';
+            foreach($results as $movie) {
+              echo '<a href="movie.php?id=' . $movie->id . '">';
+              echo '<div class="movie-item">';
+              echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
+              echo '<span class="movie-title">' . $movie->title . '</span>';
+              echo '</div>';
+              echo '</a>';
+            }
+
             echo '</div>';
-            echo '</a>';
           }
-
-          echo '</div>';
 
 
 

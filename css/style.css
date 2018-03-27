@@ -40,7 +40,6 @@ header {
 
 header a {
   text-decoration: none;
-  text-transform: lowercase;
   font-weight: 500;
   color: #fff;
   margin: 10px;
@@ -64,6 +63,10 @@ header .right {
   justify-self: end;
 }
 
+.right span {
+  color: #fff;
+}
+
 .search {
   display: inline;
 }
@@ -76,9 +79,13 @@ header .right {
 
 main {
   grid-area: main;
-  
+
   padding: 30px;
   background-color: #ffffff;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-grid {
@@ -138,6 +145,21 @@ main {
   margin-top: 10px;
 
 }
+
+.form {
+  padding: 30px;
+}
+
+.form input {
+  margin-bottom: 10px;
+  border-radius: 2px;
+  border: 1px solid #343a40;
+  padding: 10px;
+  font-size: 14px;
+}
+
+
+
 
 footer {
   grid-area: footer;

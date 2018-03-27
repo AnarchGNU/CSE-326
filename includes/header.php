@@ -7,5 +7,11 @@
   <form action="results.php" method="get" class="search">
     <input type="text" name="search" placeholder="Search...">
   </form>
-  <a href="account.php">Account</a>
+
+  <?php
+    if(isset($_SESSION["login_token"]) && $_SESSION["login_token"])
+        echo '<a href="account.php">Account</a>';
+    else
+      echo '<a href="login.php">Sign In</a> <span>/</span> <a href="register.php">Sign Up</a>';
+  ?>
 </div>

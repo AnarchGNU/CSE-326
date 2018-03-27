@@ -163,12 +163,8 @@ function searchFor($search) {
   $query = 'SELECT movie_id FROM movie WHERE title like "%'. $search . '%" ORDER BY votes_count DESC';
   $result = $conn->query($query);
 
-  if($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-      array_push($results, getMovieData($row['movie_id']));
-    }
-  } else {
-    echo "no results";
+  while($row = $result->fetch_assoc()) {
+    array_push($results, getMovieData($row['movie_id']));
   }
 
   return $results;
