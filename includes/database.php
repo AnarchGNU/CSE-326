@@ -213,6 +213,27 @@ function searchFor($search) {
 }
 
 
+function validateLogin($email, $password) {
+  $conn = databaseConnect();
+
+  $query = 'SELECT * FROM user_account WHERE email = "' . $email . '"';
+  $result = $conn->query($query);
+
+  // Account not found
+  if($result->num_rows != 1)
+    return false;
+
+  $row = $result->fetch_assoc();
+
+  // Check passwords match
+  if($password === $row["password"])
+    return true;
+  else
+    return false;
+
+}
+
+
 
 
 

@@ -95,7 +95,6 @@ main {
   justify-content: space-around;
 }
 
-
 .movie-item {
   margin: 10px;
   max-width: 166px;
@@ -156,17 +155,6 @@ main {
   grid-area: movie-stars;
 }
 
-.cast {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  font-weight: bold;
-}
-
-.actor{
-  margin-top: 10px;
-
-}
-
 .form {
   padding: 30px;
 }
@@ -179,8 +167,15 @@ main {
   font-size: 14px;
 }
 
-
-
+.error {
+  padding: 5px;
+  background-color: #fa5252;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  width: 195px;
+}
 
 footer {
   grid-area: footer;

@@ -28,7 +28,15 @@
         <h2>Login</h2>
         <input type="email" name="email" placeholder="Email"><br>
         <input type="password" name="password" placeholder="•••••••••"><br>
-        <input type="submit" style="visibility: hidden">
+        <input type="submit" style="visibility: hidden"><br>
+
+        <?php
+
+          if(isset($_GET["login"]) && $_GET["login"] === "failed")
+            echo '<div class="error"><p>Invalid email or password.</p></div>';
+
+        ?>
+
       </form>
 
 
