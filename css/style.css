@@ -129,10 +129,31 @@ main {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.movie-inf {
+.movie-block {
   display: grid;
-  grid-template-columns: repeat(2, 300px);
+  grid-template-columns: 170px 300px;
+  grid-template-rows: 60px 260px 1fr;
+  grid-template-areas: "movie-header movie-header"
+                       "movie-poster movie-info"
+                       "movie-stars movie-stars";
+}
 
+.movie-header {
+  grid-area: movie-header;
+}
+
+.movie-block .movie-poster {
+  grid-area: movie-poster;
+}
+
+.movie-info {
+  margin-top: -10px;
+  margin-left: 30px;
+  grid-area: movie-info;
+}
+
+.movie-cast {
+  grid-area: movie-stars;
 }
 
 .cast {
