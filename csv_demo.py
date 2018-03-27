@@ -21,6 +21,7 @@ total_out = 10
 
 # Must be uppercase
 base_names = [
+        "Star Wars",
         "Star Wars: Episode I - The Phantom Menace",
         "Star Wars: Episode II - Attack of the Clones",
         "Star Wars: Episode III - Revenge of the Sith"
@@ -127,7 +128,7 @@ def get_vector(movie):
 if __name__ == "__main__":
 
     # Build library from file input
-
+    print("Reading library data from CSV file...")
     try:
         in_file_str = sys.argv[1]
     except:
@@ -223,4 +224,6 @@ if __name__ == "__main__":
             str_out = out[1]
             print("    " + str_out + " (" + str(round(((1.0 - out[0]) * 100), 2)) + "%)")
             i += 1
+    print("")
+    print("Blank lines result from CSV parsing errors.\nBlank recommendations will not occur using SQL.")
     print("")
