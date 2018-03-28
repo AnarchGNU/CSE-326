@@ -32,9 +32,14 @@
 
               echo '<div class="movie-block">';
 
-                echo '<h3 class="movie-header">' . $movie->title . '</h3>';
+                echo '<h4 class="movie-header">' . $movie->title . '</h4>';
                 echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
-                echo '<div class="movie-info">';
+                echo '<div class="tab-container">';
+                  echo '<div class="tabs">';
+                    echo '<a href="javascript:void(0)" onclick="openInfo()"><div id="info-tab" class="tab tab-active">Info</div></a>';
+                    echo '<a href="javascript:void(0)" onclick="openCast()"><div id="cast-tab" class="tab">Cast</div></a>';
+                  echo '</div>';
+                echo '<div class="movie-info" id="movie-info">';
                   echo '<p>Title: ' . $movie->title . '</p>';
                   echo '<p>Produced by: ' . $produce->producer . '</p>';
                   echo '<p>Genre: ' . $movie->genre . '</p>';
@@ -44,7 +49,7 @@
                   echo '<p>ID: ' . $movie_id . '</p>';
                 echo '</div>';
 
-                echo '<div class="movie-cast">';
+                echo '<div class="movie-cast" id="movie-cast">';
                   echo '<h3>Cast:</h3>';
                   echo '<ul>';
                     foreach(getActors($movie_id) as $cast) {
@@ -52,6 +57,7 @@
                     }
                   echo '</ul>';
                 echo '</div>';
+              echo '</div>'; // tab container
 
               echo '</div>';
 
@@ -62,9 +68,39 @@
 
     </main>
 
-    <footer>
-      <?php require_once 'includes/footer.php'; ?>
-    </footer>
+    <!-- <footer>
+      <?php //require_once 'includes/footer.php'; ?>
+    </footer> -->
+
+    <script>
+
+      function openInfo() {
+        var info = document.getElementById("movie-info");
+        var cast = document.getElementById("movie-cast");
+
+        document.getElementById("info-tab").classList.add("tab-active");
+        document.getElementById("cast-tab").classList.remove("tab-active");
+
+        info.style.display = "block";
+        cast.style.display = "none";
+
+      }
+
+      function openCast() {
+        var info = document.getElementById("movie-info");
+        var cast = document.getElementById("movie-cast");
+
+        document.getElementById("info-tab").classList.remove("tab-active");
+        document.getElementById("cast-tab").classList.add("tab-active");
+
+        info.style.display = "none";
+        cast.style.display = "block";
+      }
+
+
+
+
+    </script>
 
   </body>
 </html>

@@ -13,6 +13,11 @@ html, body {
   font-weight: 300;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
   display: grid;
   min-height: 100vh;
@@ -130,11 +135,10 @@ main {
 
 .movie-block {
   display: grid;
-  grid-template-columns: 170px 300px;
-  grid-template-rows: 60px 260px 1fr;
-  grid-template-areas: "movie-header movie-header"
-                       "movie-poster movie-info"
-                       "movie-stars movie-stars";
+  grid-template-columns: 200px 400px;
+  grid-template-rows: 70px 260px 1fr;
+  grid-template-areas: "movie-header tab-container"
+                       "movie-poster tab-container";
 }
 
 .movie-header {
@@ -145,14 +149,39 @@ main {
   grid-area: movie-poster;
 }
 
-.movie-info {
-  margin-top: -10px;
-  margin-left: 30px;
-  grid-area: movie-info;
+.movie-cast {
+  display: none;
+  overflow: scroll;
+  max-height: 300px;
 }
 
-.movie-cast {
-  grid-area: movie-stars;
+.tab-container {
+  grid-area: tab-container;
+  margin: 20px 0 0 30px;
+}
+
+.tabs {
+  padding-bottom: 10px;
+  border-bottom: 4px solid #cccccc;
+}
+
+.tab {
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
+  padding: 10px;
+  padding-right: 150px;
+  border-bottom: 4px solid #cccccc;
+  border-color: #cccccc;
+}
+
+.tab:hover {
+  background-color: #eeeeee;
+}
+
+.tab-active {
+  border-color: #343a40;
 }
 
 .form {

@@ -233,6 +233,53 @@ function validateLogin($email, $password) {
 
 }
 
+function userExists($email) {
+  $conn = databaseConnect();
+
+  $query = 'SELECT * FROM user_account WHERE email = "' . $email . '"';
+  $result = $conn->query($query);
+
+  if($result->num_rows != 0)
+    return true;
+  else
+    return false;
+}
+
+function createUserAccount($email, $first, $last, $password) {
+  $conn = databaseConnect();
+
+  $query = $conn->prepare('INSERT INTO user_account (email, first_name, last_name, password) VALUES(?, ?, ?, ?)');
+  $query->bind_param(ssss, $email, $first, $last, $password);
+  $query->execute();
+
+  return true;
+}
+
+function getUserInfo($email) {
+  $conn = databaseConnect();
+
+  $user = array();
+  $user["movies"] = array();
+
+  // Get name and user id for logged in user
+  $query = 'SELECT * FROM user_account WHERE email = "' . $email . '"';
+  $result = $conn->query($query);
+  $row = $result->fetch_assoc();
+
+  $user["id"] = $row["user_id"];
+  $user["first_name"] = $row["first_name"];
+
+  // Get list of user's saved movies
+  $query = 'SELECT * FROM user_movies WHERE user_id = "' . $user["id"] . '"';
+  $result = $conn->query($query);
+
+  while($row = $result->fetch_assoc()) {
+    array_push($user["movies"], getMovieData($row["movie_id"]));
+  }
+
+  return $user;
+}
+
 
 
 

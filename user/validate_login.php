@@ -11,9 +11,11 @@
 
     if(!validateLogin($_POST["email"], $_POST["password"])) {
       $_SESSION["login_token"] = false;
+      $_SESSION["email"] = false;
       header("Location: ../login.php?login=failed");
     } else {
       $_SESSION["login_token"] = true;
+      $_SESSION["email"] = $_POST["email"];
       header("Location: ../index.php");
     }
 

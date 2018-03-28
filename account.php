@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+  session_start();
+
+  // Redirect home if not logged in
+  if(!isset($_SESSION["login_token"]) || !$_SESSION["login_token"]) {
+    header("Location: index.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +13,7 @@
     <?php require_once 'includes/head.php'; ?>
 
     <!-- Title -->
-    <title>PyFlicks - Find New Movies</title>
+    <title>PyFlicks - Account</title>
   </head>
 
   <body>
@@ -16,12 +23,18 @@
     </header>
 
     <main>
-      <div class="movie-grid">
+
+      <div>
 
         <?php
 
           require_once 'includes/database.php';
-          foreach(listMovies(12) as $movie) {
+          $info = getUserInfo($_SESSION["email"]);
+
+          echo '<h3>Welcome Back, ' . $info["first_name"] . '.</h3>';
+          echo '<h5>Your saved movies:</h5>';
+
+          foreach($info["movies"] as $movie) {
             echo '<a href="movie.php?id=' . $movie->id . '">';
             echo '<div class="movie-item">';
             echo '<img class="movie-poster" src="images' . $movie->poster . '">';
@@ -33,6 +46,8 @@
         ?>
 
       </div>
+
+
     </main>
 
     <footer>
