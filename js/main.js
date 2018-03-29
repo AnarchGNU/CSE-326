@@ -4,12 +4,22 @@ function addMovie(id) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 
-      console.log(this.responseText);
+      var message = document.getElementById("message");
 
       if(this.responseText === "1") {
-        console.log("huge success yess");
+        message.innerHTML = "Successfully saved this movie.";
+        message.style.display = "block";
+
+        setTimeout(function() {
+          message.style.display = "none";
+        }, 3000);
       } else {
-        console.log(this.responseText);
+        message.innerHTML = "You must sign in to save movies.";
+        message.style.display = "block";
+
+        setTimeout(function() {
+          message.style.display = "none";
+        }, 3000);
       }
     }
   };

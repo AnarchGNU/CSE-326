@@ -294,6 +294,17 @@ function userAddMovie($email, $movieid) {
 
 }
 
+function userRemoveMovie($email, $movieid) {
+  $conn = databaseConnect();
+
+  $query = $conn->prepare('DELETE FROM user_movies WHERE user_id = (SELECT user_id FROM user_account WHERE email = ?) AND movie_id = ?');
+  $query->bind_param(ss, $email, $movieid);
+
+  $query->execute();
+
+  return true;
+}
+
 
 
 

@@ -32,19 +32,26 @@
           $info = getUserInfo($_SESSION["email"]);
 
           echo '<h3>Welcome Back, ' . $info["first_name"] . '.</h3>';
-          echo '<h5>Your saved movies:</h5>';
-          echo '<div class="movie-grid">';
 
-          foreach($info["movies"] as $movie) {
-            echo '<a href="movie.php?id=' . $movie->id . '">';
-            echo '<div class="movie-item">';
-            echo '<img class="movie-poster" src="images' . $movie->poster . '">';
-            echo '<span class="movie-title">' . $movie->title . '</span>';
+          if(empty($info["movies"])) {
+            echo '<h5>You have no saved movies.</h5>';
+            exit();
+          } else {
+            echo '<h5>Your saved movies:</h5>';
+            echo '<div class="movie-grid">';
+
+            foreach($info["movies"] as $movie) {
+              echo '<div class="movie-item">';
+                echo '<a href="movie.php?id=' . $movie->id . '">';
+                  echo '<img class="movie-poster" src="images' . $movie->poster . '">';
+                echo '</a>';
+                echo '<a href="user/remove_movie.php?id=' . $movie->id . '"><div class="movie-remove">X</div></a>';
+                echo '<span class="movie-title">' . $movie->title . '</span>';
+              echo '</div>';
+            }
+
             echo '</div>';
-            echo '</a>';
           }
-
-          echo '</div>';
 
         ?>
 

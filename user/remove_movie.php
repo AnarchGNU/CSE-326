@@ -2,7 +2,7 @@
 
 
   session_start();
-  
+
   if(!isset($_SESSION["login_token"]) || !$_SESSION["login_token"]) {
     echo "0";
     exit();
@@ -18,9 +18,9 @@
   $email = $_SESSION["email"];
   $id = $_GET["id"];
 
-  userAddMovie($email, $id);
+  userRemoveMovie($email, $id);
 
-  echo "1";
+  header("Location: ../account.php");
 
 
 ?>

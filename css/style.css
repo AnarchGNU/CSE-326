@@ -126,6 +126,10 @@ main {
   display: block;
 }
 
+.movie-item:hover .movie-remove {
+  display: block;
+}
+
 .movie-poster {
   height: 250px;
   width: 166px;
@@ -145,6 +149,21 @@ main {
   left: 10px;
 
   background-color: #51cf66;
+  border-radius: 100px;
+  height: 30px;
+  width: 30px;
+  font-size: 26px;
+  line-height: 25px;
+
+  display: none;
+}
+
+.movie-remove {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background-color: #ff6b6b;
   border-radius: 100px;
   height: 30px;
   width: 30px;
@@ -250,7 +269,19 @@ footer {
   align-items: center;
   justify-content: center;
 
+  background: none;
+}
+
+.message {
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  line-height: 100px;
   background-color: #343a40;
+  display: none;
+  color: #51cf66;
 }
 
 
