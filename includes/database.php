@@ -59,7 +59,7 @@ function listMovies($num) {
 
   $movies = array();
 
-  $query = 'SELECT title, poster_path, movie_id FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -2 YEAR) ORDER BY avg_rating_imdb LIMIT ' . $num;
+  $query = 'SELECT title, poster_path, movie_id FROM movie WHERE release_date >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -2 YEAR) AND avg_rating_imdb > 5 ORDER BY RAND() DESC LIMIT ' . $num;
 
   $result = $conn->query($query);
 

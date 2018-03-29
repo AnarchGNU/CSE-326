@@ -45,7 +45,7 @@
                 echo '<a href="movie.php?id=' . $movie->id . '">';
                   echo '<img class="movie-poster" src="images' . $movie->poster . '">';
                 echo '</a>';
-                echo '<a href="user/remove_movie.php?id=' . $movie->id . '"><div class="movie-remove">X</div></a>';
+                echo '<a href="user/remove_movie.php?id=' . $movie->id . '"><div class="movie-remove">x</div></a>';
                 echo '<span class="movie-title">' . $movie->title . '</span>';
               echo '</div>';
             }

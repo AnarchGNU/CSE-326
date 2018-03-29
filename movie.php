@@ -33,7 +33,10 @@
               echo '<div class="movie-block">';
 
                 echo '<h4 class="movie-header">' . $movie->title . '</h4>';
+                echo '<div class="movie-item">';
                 echo '<img class="movie-poster" src="images/' . $movie->poster . '">';
+                echo '<div class="movie-add" onclick="addMovie(' . $movie->id . ')">+</div>';
+                echo '</div>';
                 echo '<div class="tab-container">';
                   echo '<div class="tabs">';
                     echo '<a href="javascript:void(0)" onclick="openInfo()"><div id="info-tab" class="tab tab-active">Info</div></a>';
@@ -68,9 +71,9 @@
 
     </main>
 
-    <!-- <footer>
-      <?php //require_once 'includes/footer.php'; ?>
-    </footer> -->
+    <footer>
+      <?php require_once 'includes/footer.php'; ?>
+    </footer>
 
     <script>
 
