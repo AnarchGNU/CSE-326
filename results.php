@@ -44,6 +44,7 @@
               echo '<a href="movie.php?id=' . $movie->id . '">';
               echo '<div class="movie-item">';
               echo '<img class="movie-poster" src="images' . $movie->poster . '">';
+              echo '<div class="movie-add" onclick="addMovie(' . $movie->id . ')">+</div>';
               echo '<span class="movie-title">' . $movie->title . '</span>';
               echo '</div>';
               echo '</a>';

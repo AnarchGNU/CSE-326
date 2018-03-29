@@ -1,11 +1,14 @@
 <!-- Meta -->
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="PyFlicks...">
 <meta name="keywords" content="movie, movies, watch, stream, recommend, movie recommend, movie recommendations">
 
 <!-- Styles -->
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Scripts -->
+<script src="js/main.js"></script>
 
 <!-- Favicon -->
 <!-- <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">

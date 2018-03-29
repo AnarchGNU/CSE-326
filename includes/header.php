@@ -1,6 +1,6 @@
 <div class="left">
   <a href="index.php">Home</a>
-  <a href="movie.php">Movies</a>
+  <a href="recommendation.php">Recommendations</a>
 </div>
 
 <div class="right">

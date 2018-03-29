@@ -25,10 +25,6 @@
     <main>
 
       <form action="user/validate_login.php" method="post" class="form">
-        <h2>Login</h2>
-        <input type="email" name="email" placeholder="Email"><br>
-        <input type="password" name="password" placeholder="•••••••••"><br>
-        <input type="submit" style="visibility: hidden"><br>
 
         <?php
 
@@ -36,6 +32,13 @@
             echo '<div class="error"><p>Invalid email or password.</p></div>';
 
         ?>
+        
+        <h2>Login</h2>
+        <input type="email" name="email" placeholder="Email"><br>
+        <input type="password" name="password" placeholder="•••••••••"><br>
+        <input type="submit" class="submit"><br>
+
+
 
       </form>
 

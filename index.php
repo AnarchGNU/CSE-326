@@ -21,13 +21,14 @@
         <?php
 
           require_once 'includes/database.php';
-          foreach(listMovies(12) as $movie) {
-            echo '<a href="movie.php?id=' . $movie->id . '">';
+          foreach(listMovies(14) as $movie) {
             echo '<div class="movie-item">';
-            echo '<img class="movie-poster" src="images' . $movie->poster . '">';
-            echo '<span class="movie-title">' . $movie->title . '</span>';
+              echo '<a href="movie.php?id=' . $movie->id . '">';
+                echo '<img class="movie-poster" src="images' . $movie->poster . '">';
+              echo '</a>';
+              echo '<div class="movie-add" onclick="addMovie(' . $movie->id . ')">+</div>';
+              echo '<span class="movie-title">' . $movie->title . '</span>';
             echo '</div>';
-            echo '</a>';
           }
 
         ?>

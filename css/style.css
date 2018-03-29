@@ -112,26 +112,48 @@ main {
   display: flex;
   flex-direction: column;
 
+  position: relative;
+
   transition: 300ms;
 }
 
 .movie-item:hover .movie-poster {
   transition: 300ms;
-  opacity: 0.5;
+  opacity: 0.9;
+}
+
+.movie-item:hover .movie-add {
+  display: block;
 }
 
 .movie-poster {
   height: 250px;
   width: 166px;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .movie-title {
   width: 166px;
   padding: 5px;
   transform: translateY(-100%);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #000;
 }
+
+.movie-add {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background-color: #51cf66;
+  border-radius: 100px;
+  height: 30px;
+  width: 30px;
+  font-size: 26px;
+  line-height: 25px;
+
+  display: none;
+}
+
 
 .movie-block {
   display: grid;
@@ -150,6 +172,7 @@ main {
 }
 
 .movie-cast {
+
   display: none;
   overflow: scroll;
   max-height: 300px;
@@ -196,6 +219,19 @@ main {
   font-size: 14px;
 }
 
+.submit {
+  background-color: #343a40;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+  width: 197px;
+  border-radius: 5px;
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
 .error {
   padding: 5px;
   background-color: #fa5252;
@@ -203,7 +239,7 @@ main {
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
-  width: 195px;
+  width: 197px;
 }
 
 footer {

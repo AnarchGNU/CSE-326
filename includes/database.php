@@ -43,6 +43,8 @@ function databaseConnect() {
     return null;
   }
 
+  $conn->set_charset("utf8");
+
   return $conn;
 }
 
@@ -278,6 +280,18 @@ function getUserInfo($email) {
   }
 
   return $user;
+}
+
+function userAddMovie($email, $movieid) {
+  $conn = databaseConnect();
+
+  $query = $conn->prepare('INSERT INTO user_movies (user_id, movie_id) VALUES((SELECT user_id FROM user_account WHERE email = ?), ?)');
+  $query->bind_param(ss, $email, $movieid);
+
+  $query->execute();
+
+  return true;
+
 }
 
 

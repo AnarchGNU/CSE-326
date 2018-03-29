@@ -33,6 +33,7 @@
 
           echo '<h3>Welcome Back, ' . $info["first_name"] . '.</h3>';
           echo '<h5>Your saved movies:</h5>';
+          echo '<div class="movie-grid">';
 
           foreach($info["movies"] as $movie) {
             echo '<a href="movie.php?id=' . $movie->id . '">';
@@ -42,6 +43,8 @@
             echo '</div>';
             echo '</a>';
           }
+
+          echo '</div>';
 
         ?>
 
