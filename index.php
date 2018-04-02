@@ -21,7 +21,7 @@
         <?php
 
           require_once 'includes/database.php';
-          foreach(listMovies(14) as $movie) {
+          foreach(listMovies2(14) as $movie) {
             echo '<div class="movie-item">';
               echo '<a href="movie.php?id=' . $movie->id . '">';
                 echo '<img class="movie-poster" src="images' . $movie->poster . '">';

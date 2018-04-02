@@ -78,6 +78,32 @@ function listMovies($num) {
   return $movies;
 }
 
+function listMovies2($num) {
+
+
+    $conn = databaseConnect();
+
+    $movies = array();
+
+    $query = 'SELECT movie.movie_id, movie.title, movie.poster_path FROM simple_recommendation join movie where simple_recommendation.movie_id = movie.movie_id ORDER BY RAND() LIMIT ' . $num;
+
+    $result = $conn->query($query);
+
+    if($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $movie = new Movie();
+        $movie->title = $row["title"];
+        $movie->poster = $row["poster_path"];
+        $movie->id = $row["movie_id"];
+        array_push($movies, $movie);
+      }
+    } else {
+      echo "no results";
+    }
+
+    return $movies;
+}
+
 
 
 function getMovieData($id) {
