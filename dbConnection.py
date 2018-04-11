@@ -2,6 +2,7 @@ import pymysql.cursors
 
 class dbConnection(object):
 
+    # depending on the configuration port, user, password and the db name will be changed
     def getConnection(self):
         try:
             connection = pymysql.connect(host='127.0.0.1',
@@ -91,6 +92,50 @@ class dbConnection(object):
             return numberOfRows
             connection.close()
 
+    def updateMovieDirector(self, list):
+        connection = self.getConnection()
+        numberOfRows = -1
+        try:
+            with connection.cursor() as cursor:
+                sql = "Update movie set director = %s where movie_id = %s"
+                numberOfRows = cursor.execute(sql, list)
+            connection.commit()
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            # print(cursor.mogrify(sql, argument))
+            raise
+            # print("An error has been raised during insertion")
+        except:
+            print("don't konw")
+        finally:
+            if numberOfRows:
+                return numberOfRows
+            connection.close()
+
+    def updateMovieMetadata(self, list):
+        connection = self.getConnection()
+        numberOfRows = -1
+        try:
+            with connection.cursor() as cursor:
+                sql = "Update movie set overview = %s, runtime = %s, tagline = %s where movie_id = %s"
+                numberOfRows = cursor.execute(sql, list)
+            connection.commit()
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            # print(cursor.mogrify(sql, argument))
+            raise
+            # print("An error has been raised during insertion")
+        except:
+            print("don't konw")
+        finally:
+            if numberOfRows:
+                return numberOfRows
+            connection.close()
+
     def createMultiCastActorRow(self, list):
         connection = self.getConnection()
         numberOfRows = -1
@@ -174,6 +219,48 @@ class dbConnection(object):
         finally:
             connection.close()
 
+    def fetchAllWithoutDirector(self):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT `imdb_id`,`movie_id` FROM `movie` where director=''"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            raise
+        finally:
+            connection.close()
+
+    def fetchAllGenre(self):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "select genre_name from movie_genre group by genre_name"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            raise
+        finally:
+            connection.close()
+
+    def fetchAllGenre(self):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "select genre_name from movie_genre group by genre_name"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            raise
+        finally:
+            connection.close()
+
     def updatePosterURL(self, poster_path, imdbID):
         connection = self.getConnection()
         try:
@@ -207,6 +294,41 @@ class dbConnection(object):
             raise
         finally:
             connection.close()
+
+    def getByMID(self, movieID):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "Select * from movie where movie_id = %s"
+                result = cursor.execute(sql, movieID)
+                result = cursor.fetchall()
+                return result;
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            print(cursor.mogrify(sql))
+            raise
+        finally:
+            connection.close()
+
+    def getMovieGenre(self, movieID):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "Select genre_name from movie_genre where movie_id = %s"
+                result = cursor.execute(sql, movieID)
+                result = cursor.fetchall()
+                return result;
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            print(cursor.mogrify(sql))
+            raise
+        finally:
+            connection.close()
+
 # ALTER TABLE `users` ADD `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 
