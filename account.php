@@ -31,26 +31,28 @@
           require_once 'includes/database.php';
           $info = getUserInfo($_SESSION["email"]);
 
-          echo '<h3>Welcome Back, ' . $info["first_name"] . '.</h3>';
+          echo '<h3>Welcome Back, ' . $info["first_name"] . ': user id: '. $info["id"] . '.</h3>';
 
           if(empty($info["movies"])) {
             echo '<h5>You have no saved movies.</h5>';
             exit();
           } else {
             echo '<h5>Your saved movies:</h5>';
-            echo '<div class="movie-grid">';
+            echo "<div>";
+            echo '<ul class="movie_scroll">';
 
             foreach($info["movies"] as $movie) {
-              echo '<div class="movie-item">';
+              echo '<li class="movie-item">';
                 echo '<a href="movie.php?id=' . $movie->id . '">';
                   echo '<img class="movie-poster" src="images' . $movie->poster . '">';
                 echo '</a>';
                 echo '<a href="user/remove_movie.php?id=' . $movie->id . '"><div class="movie-remove">x</div></a>';
                 echo '<span class="movie-title">' . $movie->title . '</span>';
-              echo '</div>';
+              echo '</li>';
             }
 
-            echo '</div>';
+            echo '</ul>';
+            echo "</div>";
           }
 
         ?>

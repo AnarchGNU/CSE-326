@@ -284,7 +284,14 @@ footer {
   color: #51cf66;
 }
 
+.movie_scroll {
+  display: inline-flex;
+  overflow-x: auto;
+  width: 80vw;
+  white-space: nowrap;
+  grid-template-rows: 70px 260px 1fr;
 
+}
 
 
 
