@@ -1,0 +1,22 @@
+# COLLABORATIVE FILTERING Uploaded Files Information
+
+1. cold_start_recommendations.py : Generate recommendations for a Guest/New User who doesn't have a movie rating history
+      replace 'movies.csv' with the movie database table ('movie_id', 'title', 'genre')
+      
+2. matrix_factorization_utilities.py : Actual Stochastic Gradient Descent(SGD) matrix factorization for recommendations (means.dat)
+      Nothing to change
+      
+3. product_similarity_from_data_files.py : gets features from the dataset calculating differences between ratings
+
+4. recommend.py : calls all the methods and prints final output
+      replace 'movies.csv' with the movie database table ('movie_id', 'title', 'genre')
+      
+5. train_recommender.py : training for existing users with some rating history
+     replace 'movie_ratings_data_set.csv' with the table ('user_id', 'movie_id', 'value')
+     
+6. train_recommender_user.py : training for the cold start(no history)
+     replace 'movie_ratings_data_set.csv' with the table ('user_id', 'movie_id', 'value')
+     
+Guest user : cold_start_recommendations.py
+New User  :  train_recommender_user.py + cold_start_recommendations.py
+Regular User : train_recommender.py + recommend.py
