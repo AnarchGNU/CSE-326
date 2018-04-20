@@ -329,6 +329,45 @@ class dbConnection(object):
         finally:
             connection.close()
 
+    def selectUserMovie(self, userID):
+        connection = self.getConnection()
+        try:
+            with connection.cursor() as cursor:
+                sql = "Select movie_id from user_movies where user_id = %s"
+                result = cursor.execute(sql, userID)
+                result = cursor.fetchall()
+                return result;
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            print(cursor.mogrify(sql))
+            raise
+        finally:
+            connection.close()
+
+    def createUserBasedRecommendation(self, list):
+        connection = self.getConnection()
+        numberOfRows = -1
+        try:
+            with connection.cursor() as cursor:
+                sql = "INSERT INTO `user_based_recommendation` (`movie_id`, `user_id`, `score`) " \
+                      "VALUES (%s, %s, %s)"
+                numberOfRows = cursor.executemany(sql, list)
+            connection.commit()
+        except (pymysql.DatabaseError, pymysql.MySQLError, pymysql.Warning, pymysql.DataError, pymysql.Error,
+                pymysql.InternalError, pymysql.IntegrityError, pymysql.InterfaceError, pymysql.OperationalError,
+                pymysql.ProgrammingError) as e:
+            print('Got error in casts table{!r}, errno is {}'.format(e, e.args[0]))
+            # print(cursor.mogrify(sql, argument))
+            raise
+            # print("An error has been raised during insertion")
+        except:
+            print("don't konw")
+        finally:
+            if numberOfRows:
+                return numberOfRows
+            connection.close()
 # ALTER TABLE `users` ADD `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 
