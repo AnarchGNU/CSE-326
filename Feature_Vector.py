@@ -27,8 +27,6 @@ def mid_to_fv(movie):
     #       Arrays appended to end of feature vector - not array sub-elements
 
     # NOTE: If values are not present for a given movie, the variable is set to None
-    # list_genres = list_genres['genre_name'].values
-    # movie = pd.DataFrame(dbobj.getByMID(mid))               # Access database object
 
     # Simple numeric values
     runtime = float(movie['runtime'])                       # Should be set to None if not available

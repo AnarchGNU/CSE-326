@@ -12,7 +12,6 @@ class RF_Clf:
 
     ### Constructor
     def __init__(self, iw=100):
-        # TODO: Constructor code here
         self.input_weight = iw                  # Default weight for user preferences
         self.RF = rf.RandomForestClassifier()   # Random Forest object
         self.IMP = Imputer(missing_values='NaN', strategy='mean', axis=0)
@@ -90,7 +89,6 @@ class RF_Clf:
                 out_i = heapq.heappop(heap)   # Remove top item from list
 
                 if out_i[1] not in mids_usr:
-                    mid_out = out_i[1]
                     out_list.append(out_i)
                     i += 1
 
