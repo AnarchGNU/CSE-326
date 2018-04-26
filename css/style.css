@@ -11,6 +11,7 @@ html, body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
+  overflow: scroll;
 }
 
 a {
@@ -175,11 +176,16 @@ main {
 
 
 .movie-block {
+  padding: 30px;
+  border-radius: 5px;
+  border: 1px solid #343a40;
+
   display: grid;
   grid-template-columns: 200px 400px;
   grid-template-rows: 70px 260px 1fr;
   grid-template-areas: "movie-header tab-container"
                        "movie-poster tab-container";
+
 }
 
 .movie-header {
@@ -286,7 +292,7 @@ footer {
 
 .movie_scroll {
   display: inline-flex;
-  overflow-x: auto;
+  overflow-y: scroll;
   width: 80vw;
   white-space: nowrap;
   grid-template-rows: 70px 260px 1fr;
