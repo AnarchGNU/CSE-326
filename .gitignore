@@ -3,3 +3,6 @@ images/
 old_images/
 *.zip
 *.tar.gz
+*.py
+*.csv
+*.sql
